@@ -163,7 +163,7 @@
 (define-abbrev-table 'graphviz-dot-mode-abbrev-table ())
 
 (defcustom graphviz-dot-dot-program "dot"
-  "*Location of the dot program. This is used by `compile'."
+  "*Location of the dot program.  This is used by `compile'."
   :type 'string
   :group 'graphviz)
 
@@ -174,20 +174,19 @@
   :group 'graphviz)
 
 (defcustom graphviz-dot-view-command "doted %s"
-  "*External program to run on the buffer. You can use `%s' in this string,
-and it will be substituted by the buffer name."
+  "*External program to run on the buffer.
+You can use `%s' in this string, and it will be substituted by
+the buffer name."
   :type 'string
   :group 'graphviz)
 
 (defcustom graphviz-dot-view-edit-command nil
-  "*Whether to allow the user to edit the command to run an external
-viewer."
+  "*Whether to allow the user to edit the command to run an external viewer."
   :type 'boolean
   :group 'graphviz)
 
 (defcustom graphviz-dot-save-before-view t
-  "*If not nil, M-x graphviz-dot-view saves the current buffer before running
-the command."
+  "*If not nil, \\[graphviz-dot-view] saves the current buffer before running the command."
   :type 'boolean
   :group 'graphviz)
 
@@ -202,19 +201,19 @@ the command."
   :group 'graphviz)
 
 (defcustom graphviz-dot-auto-indent-on-braces nil
-  "*If not nil, `electric-graphviz-dot-open-brace' and `electric-graphviz-dot-close-brace' are executed when { or } are typed"
+  "*If not nil, `electric-graphviz-dot-open-brace' and `electric-graphviz-dot-close-brace' are executed when { or } are typed."
   :type 'boolean
   :group 'graphviz)
 
 (defcustom graphviz-dot-auto-indent-on-semi t
-  "*If not nil, `electric-graphviz-dot-semi' is executed when semicolon is typed"
+  "*If not nil, `electric-graphviz-dot-semi' is executed when semicolon is typed."
   :type 'boolean
   :group 'graphviz)
 
 (defcustom graphviz-dot-preview-extension "png"
-  "*The extension to use for the compilation and preview commands. The format
-for the compilation command is
-`dot -T<extension> file.dot > file.<extension>'."
+  "*The extension to use for the compilation and preview commands.
+The format for the compilation command is `dot -T<extension>
+file.dot > file.<extension>'."
   :type 'string
   :group 'graphviz)
 
@@ -227,8 +226,7 @@ completion, a buffer will display all completions."
   :group 'graphviz)
 
 (defcustom graphviz-dot-delete-completions nil
-  "*Non-nil means that the completion buffer is automatically deleted when a
-key is pressed."
+  "*Non-nil means that the completion buffer is automatically deleted when a key is pressed."
   :type 'boolean
   :group 'graphviz)
 
@@ -262,10 +260,12 @@ key is pressed."
     "sides" "skew" "splines" "start" "style" "stylesheet" "tailURL"
     "taillabel" "tailport" "toplabel" "vertices" "voro_margin" "weight"
     "z" "width" "penwidth" "mindist" "scale" "patch" "root")
-  "*Keywords for attribute names in a graph. This is used by the auto
-completion code. The actual completion tables are built when the mode
-is loaded, so changes to this are not immediately visible.
-Check http://www.graphviz.org/doc/schema/attributes.xml on new releases."
+  "*Keywords for attribute names in a graph.
+This is used by the auto completion code.  The actual completion
+tables are built when the mode is loaded, so changes to this are
+not immediately visible.  Check
+http://www.graphviz.org/doc/schema/attributes.xml on new
+releases."
   :type '(repeat (string :tag "Keyword"))
   :group 'graphviz)
 
@@ -281,9 +281,10 @@ Check http://www.graphviz.org/doc/schema/attributes.xml on new releases."
     "invtrapezium" "invhouse" "Mdiamond" "Msquare" "Mcircle" "record"
     "Mrecord" "dashed" "dotted" "solid" "invis" "bold" "filled"
     "diagonals" "rounded" )
-  "*Keywords for attribute values. This is used by the auto completion
-code. The actual completion tables are built when the mode is loaded,
-so changes to this are not immediately visible."
+  "*Keywords for attribute values.
+This is used by the auto completion code.  The actual completion
+tables are built when the mode is loaded, so changes to this are
+not immediately visible."
   :type '(repeat (string :tag "Keyword"))
   :group 'graphviz)
 
@@ -517,7 +518,7 @@ package. Note that the latest X/Emacs releases contain this package.")
 
 ;;;###autoload
 (define-derived-mode graphviz-dot-mode prog-mode "dot"
-  "Major mode for the dot language. \\<graphviz-dot-mode-map>
+  "Major mode for the dot language.  \\<graphviz-dot-mode-map>
 TAB indents for graph lines.
 
 \\[graphviz-dot-indent-graph]\t- Indentation function.
@@ -844,9 +845,10 @@ then indent this and each subgraph in it."
 ;;;; View
 ;;;;
 (defun graphviz-dot-view ()
-  "Runs an external viewer. This creates an external process every time it
-is executed. If `graphviz-dot-save-before-view' is set, the current
-buffer is saved before the command is executed."
+  "Run an external viewer.
+This creates an external process every time it is executed.  If
+`graphviz-dot-save-before-view' is set, the current buffer is
+saved before the command is executed."
   (interactive)
   (let ((cmd (if graphviz-dot-view-edit-command
                  (if (fboundp 'read-shell-command)
@@ -874,7 +876,7 @@ buffer is saved before the command is executed."
 (defvar graphviz-dot-flag nil)
 
 (defun graphviz-dot-get-state ()
-  "Returns the syntax state of the current point."
+  "Return the syntax state of the current point."
   (let ((state (parse-partial-sexp (point-min) (point))))
     (cond
      ((nth 4 state) 'comment)
@@ -893,7 +895,7 @@ buffer is saved before the command is executed."
            (t 'other)))))))
 
 (defun graphviz-dot-get-keywords ()
-  "Return possible completions for a word"
+  "Return possible completions for a word."
   (let ((state (graphviz-dot-get-state)))
     (cond
      ((equal state 'comment)   ())
